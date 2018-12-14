@@ -1,6 +1,9 @@
 FROM node:6-alpine
 MAINTAINER Giorgio Regni <gr@scality.com>
 
+ENV NO_PROXY localhost,127.0.0.1
+ENV no_proxy localhost,127.0.0.1
+
 EXPOSE 8000
 
 COPY ./package.json ./package-lock.json /usr/src/app/
@@ -22,9 +25,6 @@ RUN apk add --update jq bash\
 COPY . /usr/src/app
 
 VOLUME ["/usr/src/app/localData","/usr/src/app/localMetadata"]
-
-ENV NO_PROXY localhost,127.0.0.1
-ENV no_proxy localhost,127.0.0.1
 
 ENTRYPOINT ["/usr/src/app/docker-entrypoint.sh"]
 
